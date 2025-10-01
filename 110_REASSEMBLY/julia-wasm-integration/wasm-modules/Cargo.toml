@@ -1,0 +1,28 @@
+[package]
+name = "reassembly-wasm-modules"
+version = "0.1.0"
+edition = "2021"
+authors = ["RE:ASSEMBLY Framework"]
+description = "WebAssembly modules for RE:ASSEMBLY consciousness computing"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wasm-bindgen = "0.2"
+js-sys = "0.3"
+serde = { version = "1.0", features = ["derive"] }
+serde-wasm-bindgen = "0.6"
+
+[dependencies.web-sys]
+version = "0.3"
+features = [
+  "console",
+  "Performance",
+  "Window",
+]
+
+[profile.release]
+opt-level = "s"  # Optimize for size
+lto = true       # Link-time optimization
+panic = "abort"  # Reduce binary size

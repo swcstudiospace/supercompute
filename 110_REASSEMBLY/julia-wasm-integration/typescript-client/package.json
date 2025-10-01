@@ -1,0 +1,37 @@
+{
+  "name": "reassembly-julia-client",
+  "version": "1.0.0",
+  "description": "TypeScript client for Julia-based RE:ASSEMBLY computational backend",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "jest",
+    "lint": "eslint src/**/*.ts",
+    "demo": "npm run build && node dist/demo.js"
+  },
+  "dependencies": {
+    "ws": "^8.14.2",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.5.8",
+    "@types/node": "^20.8.0",
+    "typescript": "^5.2.2",
+    "jest": "^29.7.0",
+    "@types/jest": "^29.5.5",
+    "eslint": "^8.51.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@typescript-eslint/parser": "^6.7.4"
+  },
+  "keywords": [
+    "julia",
+    "webassembly",
+    "typescript",
+    "reassembly",
+    "consciousness-computing"
+  ],
+  "author": "RE:ASSEMBLY Framework",
+  "license": "MIT"
+}
