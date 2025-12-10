@@ -212,3 +212,5 @@ supercompute/.schemantics_cache/
 # Omega Point Theory - First Earth Observation
 # Oveshen Govender, Australia, 2025
 # ============================================
+.gemini/
+gha-creds-*.json

@@ -9,6 +9,7 @@
       "type": "object",
       "description": "Configuration for tracking symbolic residue",
       "required": ["enabled", "trackedResidues", "residueMetrics", "processingStrategy"],
+
       "properties": {
         "enabled": {
           "type": "boolean",

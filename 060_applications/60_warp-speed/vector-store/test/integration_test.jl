@@ -15,6 +15,28 @@ using PyCall
 include("../VectorStoreManager.jl")
 using .VectorStoreManager
 
+const DATA_ROOT = get(ENV, "WARP_VECTOR_DATA_ROOT", normpath(joinpath(@__DIR__, "..", "data")))
+const TEMPLATE_DATA_PATH = get(
+    ENV,
+    "WARP_VECTOR_TEMPLATE_DATA",
+    normpath(joinpath(DATA_ROOT, "templates", "template_data.json"))
+)
+const FOUNDATIONS_DATA_PATH = get(
+    ENV,
+    "WARP_VECTOR_FOUNDATIONS_DATA",
+    normpath(joinpath(DATA_ROOT, "foundations", "foundations_data.json"))
+)
+const TEMPLATE_INDEX_PATH = get(
+    ENV,
+    "WARP_VECTOR_TEMPLATE_INDEX",
+    normpath(joinpath(DATA_ROOT, "indices", "template_index.faiss"))
+)
+const FOUNDATIONS_INDEX_PATH = get(
+    ENV,
+    "WARP_VECTOR_FOUNDATIONS_INDEX",
+    normpath(joinpath(DATA_ROOT, "indices", "foundations_index.faiss"))
+)
+
 println("🧪 Vector Store Integration Test Suite")
 println("="^50)
 
@@ -58,10 +80,10 @@ println("="^50)
         println("Testing data file integrity...")
         
         # Check if data files exist
-        template_data_path = "../data/templates/template_data.json"
-        foundations_data_path = "../data/foundations/foundations_data.json"
-        template_index_path = "../data/indices/template_index.faiss"
-        foundations_index_path = "../data/indices/foundations_index.faiss"
+        template_data_path = TEMPLATE_DATA_PATH
+        foundations_data_path = FOUNDATIONS_DATA_PATH
+        template_index_path = TEMPLATE_INDEX_PATH
+        foundations_index_path = FOUNDATIONS_INDEX_PATH
         
         @testset "Template Data" begin
             if isfile(template_data_path)

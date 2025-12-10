@@ -28,6 +28,16 @@ Warp-Speed Vector Store System
 
 ## 🚀 Quick Start
 
+### 0. Prerequisites
+
+- Ensure PyCall can see a Python with FAISS installed. From the repo root run `python3 -m pip install faiss-cpu numpy` (or `faiss-gpu` if you have CUDA).
+- Place the provided index payloads where the vector store expects them:
+  - `cp ~/src/repos/template_data.json 060_applications/60_warp-speed/data/templates/template_data.json`
+  - `cp ~/src/repos/template_index.faiss 060_applications/60_warp-speed/data/indices/template_index.faiss`
+  - `cp ~/src/repos/foundations_data.json 060_applications/60_warp-speed/data/foundations/foundations_data.json`
+  - `cp ~/src/repos/foundations_index.faiss 060_applications/60_warp-speed/data/indices/foundations_index.faiss`
+  (Alternatively set `WARP_VECTOR_DATA_ROOT` or the specific `WARP_VECTOR_*` paths described below.)
+
 ### 1. Initialize Vector Stores
 
 ```julia
@@ -196,6 +206,7 @@ julia --project integration_test.jl
 ### Environment Variables
 ```bash
 # Vector store paths
+WARP_VECTOR_DATA_ROOT=060_applications/60_warp-speed/data
 WARP_VECTOR_TEMPLATE_DATA=data/templates/template_data.json
 WARP_VECTOR_TEMPLATE_INDEX=data/indices/template_index.faiss
 WARP_VECTOR_FOUNDATIONS_DATA=data/foundations/foundations_data.json

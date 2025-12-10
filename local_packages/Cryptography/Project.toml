@@ -1,0 +1,6 @@
+name = "Cryptography"
+uuid = "76254b40-78e5-4b0e-b9d2-1cfc8d1f6e99"
+authors = ["Supercompute Placeholder"]
+version = "0.1.0"
+
+[deps]

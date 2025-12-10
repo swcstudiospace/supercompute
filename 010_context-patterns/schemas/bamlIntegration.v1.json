@@ -1,0 +1,550 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://supercompute.me/schemas/baml-integration/v1.0.0",
+  "title": "BAML Integration Schema v1.0",
+  "description": "Schema for BAML (Behavioral Analysis Markup Language) integration in Context Patterns",
+  "type": "object",
+  "version": "1.0.0",
+  
+  "properties": {
+    "bamlIntegration": {
+      "type": "object",
+      "description": "BAML prompting language integration configuration",
+      "required": ["version", "prompt_engine", "templates"],
+      
+      "properties": {
+        "version": {
+          "type": "string",
+          "const": "1.0.0",
+          "description": "BAML integration schema version"
+        },
+        
+        "prompt_engine": {
+          "type": "object",
+          "description": "BAML prompt engine configuration",
+          "required": ["type", "capabilities"],
+          
+          "properties": {
+            "type": {
+              "type": "string",
+              "const": "behavioral_analysis",
+              "description": "BAML engine type"
+            },
+            
+            "capabilities": {
+              "type": "array",
+              "description": "BAML engine capabilities",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "context_extraction",
+                  "pattern_recognition",
+                  "semantic_analysis",
+                  "behavioral_modeling",
+                  "quantum_awareness",
+                  "residue_tracking"
+                ]
+              }
+            },
+            
+            "version": {
+              "type": "string",
+              "description": "BAML engine version"
+            },
+            
+            "configuration": {
+              "type": "object",
+              "description": "Engine configuration",
+              "properties": {
+                "max_prompt_length": {
+                  "type": "integer",
+                  "minimum": 100,
+                  "maximum": 100000,
+                  "description": "Maximum prompt length"
+                },
+                "timeout": {
+                  "type": "number",
+                  "minimum": 1,
+                  "maximum": 300,
+                  "description": "Prompt timeout in seconds"
+                },
+                "retry_policy": {
+                  "type": "string",
+                  "enum": ["exponential_backoff", "linear", "fixed"],
+                  "description": "Retry policy for failed prompts"
+                }
+              }
+            }
+          }
+        },
+        
+        "templates": {
+          "type": "object",
+          "description": "BAML prompt templates",
+          "patternProperties": {
+            "^[a-zA-Z][a-zA-Z0-9_]*$": {
+              "type": "object",
+              "description": "BAML template definition",
+              "required": ["name", "description", "prompt", "output_format"],
+              
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Template name"
+                },
+                
+                "description": {
+                  "type": "string",
+                  "description": "Template description"
+                },
+                
+                "category": {
+                  "type": "string",
+                  "enum": ["context_extraction", "pattern_analysis", "semantic_processing", "behavioral_modeling"],
+                  "description": "Template category"
+                },
+                
+                "prompt": {
+                  "type": "object",
+                  "description": "BAML prompt structure",
+                  "required": ["template", "variables"],
+                  
+                  "properties": {
+                    "template": {
+                      "type": "string",
+                      "description": "BAML prompt template string"
+                    },
+                    
+                    "variables": {
+                      "type": "object",
+                      "description": "Template variables",
+                      "patternProperties": {
+                        "^[a-zA-Z][a-zA-Z0-9_]*$": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": ["string", "number", "boolean", "array", "object"],
+                              "description": "Variable type"
+                            },
+                            "required": {
+                              "type": "boolean",
+                              "description": "Whether variable is required"
+                            },
+                            "default": {
+                              "description": "Default value for variable"
+                            },
+                            "validation": {
+                              "type": "object",
+                              "description": "Variable validation rules",
+                              "properties": {
+                                "min_length": {
+                                  "type": "integer",
+                                  "minimum": 0,
+                                  "description": "Minimum length"
+                                },
+                                "max_length": {
+                                  "type": "integer",
+                                  "minimum": 0,
+                                  "description": "Maximum length"
+                                },
+                                "pattern": {
+                                  "type": "string",
+                                  "description": "Regex pattern"
+                                },
+                                "enum": {
+                                  "type": "array",
+                                  "description": "Allowed values",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    
+                    "context": {
+                      "type": "object",
+                      "description": "Prompt context configuration",
+                      "properties": {
+                        "domain": {
+                          "type": "string",
+                          "description": "Domain context"
+                        },
+                        "task": {
+                          "type": "string",
+                          "description": "Task context"
+                        },
+                        "constraints": {
+                          "type": "array",
+                          "description": "Context constraints",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                
+                "output_format": {
+                  "type": "object",
+                  "description": "Expected output format",
+                  "required": ["type", "structure"],
+                  
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": ["json", "xml", "text", "structured"],
+                      "description": "Output type"
+                    },
+                    
+                    "structure": {
+                      "type": "object",
+                      "description": "Output structure definition",
+                      "properties": {
+                        "schema": {
+                          "type": "string",
+                          "description": "Output schema reference"
+                        },
+                        "fields": {
+                          "type": "object",
+                          "description": "Output fields definition",
+                          "patternProperties": {
+                            "^[a-zA-Z][a-zA-Z0-9_]*$": {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string",
+                                  "enum": ["string", "number", "boolean", "array", "object"],
+                                  "description": "Field type"
+                                },
+                                "required": {
+                                  "type": "boolean",
+                                  "description": "Whether field is required"
+                                },
+                                "source": {
+                                  "type": "string",
+                                  "description": "Source of field value"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    
+                    "validation": {
+                      "type": "object",
+                      "description": "Output validation rules",
+                      "properties": {
+                        "schema_validation": {
+                          "type": "boolean",
+                          "description": "Whether to validate against schema"
+                        },
+                        "content_validation": {
+                          "type": "boolean",
+                          "description": "Whether to validate content"
+                        },
+                        "custom_validators": {
+                          "type": "array",
+                          "description": "Custom validator functions",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                
+                "parameters": {
+                  "type": "object",
+                  "description": "Template parameters",
+                  "properties": {
+                    "temperature": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 2,
+                      "description": "Temperature for generation"
+                    },
+                    "max_tokens": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 10000,
+                      "description": "Maximum tokens to generate"
+                    },
+                    "top_p": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1,
+                      "description": "Top-p sampling parameter"
+                    },
+                    "frequency_penalty": {
+                      "type": "number",
+                      "minimum": -2,
+                      "maximum": 2,
+                      "description": "Frequency penalty"
+                    }
+                  }
+                },
+                
+                "examples": {
+                  "type": "array",
+                  "description": "Template usage examples",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "input": {
+                        "type": "object",
+                        "description": "Example input data"
+                      },
+                      "variables": {
+                        "type": "object",
+                        "description": "Example variable values"
+                      },
+                      "expected_output": {
+                        "description": "Expected output for this example"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        
+        "integration": {
+          "type": "object",
+          "description": "BAML integration configuration",
+          "required": ["xml_wrapping", "pareto_lang"],
+          
+          "properties": {
+            "xml_wrapping": {
+              "type": "object",
+              "description": "XML wrapping configuration for BAML",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "description": "Whether to enable XML wrapping"
+                },
+                "namespace": {
+                  "type": "string",
+                  "description": "XML namespace for BAML tags"
+                },
+                "tag_prefix": {
+                  "type": "string",
+                  "const": "baml",
+                  "description": "BAML XML tag prefix"
+                },
+                "attributes": {
+                  "type": "object",
+                  "description": "Default XML attributes for BAML tags",
+                  "properties": {
+                    "version": {
+                      "type": "string",
+                      "description": "BAML version attribute"
+                    },
+                    "timestamp": {
+                      "type": "boolean",
+                      "description": "Whether to include timestamp"
+                    },
+                    "validation": {
+                      "type": "string",
+                      "description": "Validation status"
+                    }
+                  }
+                }
+              }
+            },
+            
+            "pareto_lang": {
+              "type": "object",
+              "description": "Pareto-lang integration for BAML",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "description": "Whether to enable Pareto-lang operations"
+                },
+                "operation_mapping": {
+                  "type": "object",
+                  "description": "Mapping between BAML and Pareto-lang operations",
+                  "patternProperties": {
+                    "^[a-zA-Z][a-zA-Z0-9_]*$": {
+                      "type": "string",
+                      "description": "Pareto-lang operation mapping"
+                    }
+                  }
+                },
+                "syntax_validation": {
+                  "type": "boolean",
+                  "description": "Whether to validate Pareto-lang syntax"
+                }
+              }
+            },
+            
+            "context_patterns": {
+              "type": "object",
+              "description": "Context Patterns integration",
+              "properties": {
+                "schema_validation": {
+                  "type": "boolean",
+                  "description": "Whether to validate against Context Patterns schema"
+                },
+                "transformation_pipeline": {
+                  "type": "boolean",
+                  "description": "Whether to use transformation pipeline"
+                },
+                "residue_tracking": {
+                  "type": "boolean",
+                  "description": "Whether to enable symbolic residue tracking"
+                }
+              }
+            }
+          }
+        },
+        
+        "execution": {
+          "type": "object",
+          "description": "BAML execution configuration",
+          "required": ["mode", "optimization"],
+          
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": ["synchronous", "asynchronous", "batch", "streaming"],
+              "description": "Execution mode"
+            },
+            
+            "optimization": {
+              "type": "object",
+              "description": "Execution optimization settings",
+              "properties": {
+                "caching": {
+                  "type": "boolean",
+                  "description": "Whether to enable caching"
+                },
+                "parallel_processing": {
+                  "type": "boolean",
+                  "description": "Whether to enable parallel processing"
+                },
+                "batch_size": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 1000,
+                  "description": "Batch size for processing"
+                },
+                "memory_optimization": {
+                  "type": "boolean",
+                  "description": "Whether to optimize memory usage"
+                }
+              }
+            },
+            
+            "monitoring": {
+              "type": "object",
+              "description": "Execution monitoring configuration",
+              "properties": {
+                "metrics_enabled": {
+                  "type": "boolean",
+                  "description": "Whether to enable metrics collection"
+                },
+                "logging_level": {
+                  "type": "string",
+                  "enum": ["debug", "info", "warn", "error"],
+                  "description": "Logging level"
+                },
+                "performance_tracking": {
+                  "type": "boolean",
+                  "description": "Whether to track performance metrics"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  
+  "required": ["bamlIntegration"],
+  
+  "additionalProperties": false,
+  
+  "examples": [
+    {
+      "bamlIntegration": {
+        "version": "1.0.0",
+        "prompt_engine": {
+          "type": "behavioral_analysis",
+          "capabilities": ["context_extraction", "pattern_recognition", "semantic_analysis"],
+          "version": "2.1.0",
+          "configuration": {
+            "max_prompt_length": 50000,
+            "timeout": 120,
+            "retry_policy": "exponential_backoff"
+          }
+        },
+        "templates": {
+          "context_extraction": {
+            "name": "context_extraction",
+            "description": "Extract semantic context from input",
+            "category": "context_extraction",
+            "prompt": {
+              "template": "<baml:extract>Extract context from: {input_text}</baml:extract>",
+              "variables": {
+                "input_text": {
+                  "type": "string",
+                  "required": true
+                },
+                "domain": {
+                  "type": "string",
+                  "required": false,
+                  "default": "general"
+                }
+              },
+              "context": {
+                "domain": "context_analysis",
+                "task": "semantic_extraction"
+              }
+            },
+            "output_format": {
+              "type": "json",
+              "structure": {
+                "schema": "contextPattern.v1.json"
+              }
+            }
+          }
+        },
+        "integration": {
+          "xml_wrapping": {
+            "enabled": true,
+            "namespace": "https://supercompute.ai/baml",
+            "tag_prefix": "baml",
+            "attributes": {
+              "version": "1.0.0",
+              "timestamp": true
+            }
+          },
+          "pareto_lang": {
+            "enabled": true,
+            "operation_mapping": {
+              "extract": "/extract.context",
+              "analyze": "/analyze.semantic"
+            }
+          }
+        },
+        "execution": {
+          "mode": "asynchronous",
+          "optimization": {
+            "caching": true,
+            "parallel_processing": true,
+            "batch_size": 50
+          }
+        }
+      }
+    }
+  ]
+}
