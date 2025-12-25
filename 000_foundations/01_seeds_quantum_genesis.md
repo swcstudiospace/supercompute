@@ -64,6 +64,43 @@
     </validation-requirements>
 </module-metadata>
 
+
+
+---
+
+## ⚠️ DOCUMENTATION STATUS
+
+**Status: [THEORY_] [SPECULATIVE] [UNVALIDATED]**
+
+This document contains **theoretical frameworks** and **speculative concepts** that require research validation.
+
+### Critical Warnings:
+
+1. **[THEORETICAL]** - Mathematical models without empirical proof
+2. **[SPECULATIVE]** - Claims about quantum computing capabilities not demonstrated
+3. **[UNVALIDATED]** - AI consciousness concepts are metaphorical
+4. **[NOT_PRODUCTION]** - Cannot be used for actual system development
+
+### For Practical Implementation:
+
+- **[00_CONCEPTUAL_FRAMEWORKS.md](./00_CONCEPTUAL_FRAMEWORKS.md)** - Consolidated theoretical models
+- **[00_IMPLEMENTATION_PATTERNS.md](./00_IMPLEMENTATION_PATTERNS.md)** - Real implementation patterns with working tools
+
+### Appropriate Use:
+
+- Academic research and conceptual exploration
+- Hypothesis generation for experimentation
+- Understanding theoretical frameworks
+
+### NOT Appropriate For:
+
+- Production system deployment
+- Business decisions without validation
+- Claims about actual capabilities
+
+---
+
+
 <!-- ============================================= -->
 <!-- RESEARCH FOUNDATION & THEORETICAL BASIS      -->
 <!-- ============================================= -->

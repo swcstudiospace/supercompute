@@ -78,6 +78,44 @@ Mature trees operationalize research from IBM Zurich's cognitive tools, Princeto
 │  │  • Field-driven behavioral persistence                         │   │
 │  │  • Enterprise-scale adaptive scaling                           │   │
 │  │  • Cross-canopy knowledge synthesis                            │   │
+
+
+---
+
+## ⚠️ DOCUMENTATION STATUS
+
+**Status: [THEORY_] [SPECULATIVE] [UNVALIDATED]**
+
+This document contains **theoretical frameworks** and **speculative concepts** that require research validation.
+
+### Critical Warnings:
+
+1. **[THEORETICAL]** - Mathematical models and concepts without empirical proof
+2. **[SPECULATIVE]** - Claims about quantum computing capabilities not demonstrated
+3. **[UNVALIDATED]** - AI consciousness concepts are metaphorical
+4. **[NOT_PRODUCTION]** - Cannot be used for actual system development
+5. **[XML_METADATA]** - XML tags are speculative fiction, not real implementations
+
+### For Practical Implementation:
+
+- **[00_CONCEPTUAL_FRAMEWORKS.md](./00_CONCEPTUAL_FRAMEWORKS.md)** - Consolidated theoretical models
+- **[00_IMPLEMENTATION_PATTERNS.md](./00_IMPLEMENTATION_PATTERNS.md)** - Real implementation patterns with working tools
+
+### Appropriate Use:
+
+- Academic research and conceptual exploration
+- Hypothesis generation for experimentation
+- Understanding theoretical frameworks
+
+### NOT Appropriate For:
+
+- Production system deployment
+- Business decisions without validation
+- Claims about actual capabilities
+
+---
+
+
 │  │  • Production-ready deployment orchestration                   │   │
 │  └─────────────────────────────────────────────────────────────────┘   │
 │                                                                        │

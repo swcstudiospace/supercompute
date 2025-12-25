@@ -6,6 +6,44 @@ Software engineering transcends craft to become applied mathematics when every f
 
 ## 1. Introduction: Programming as Applied Science
 
+
+
+---
+
+## ⚠️ DOCUMENTATION STATUS
+
+**Status: [THEORY_] [SPECULATIVE] [UNVALIDATED]**
+
+This document contains **theoretical frameworks** and **speculative concepts** that require research validation.
+
+### Critical Warnings:
+
+1. **[THEORETICAL]** - Mathematical models without empirical proof
+2. **[SPECULATIVE]** - Claims about quantum computing capabilities not demonstrated
+3. **[UNVALIDATED]** - AI consciousness concepts are metaphorical
+4. **[NOT_PRODUCTION]** - Cannot be used for actual system development
+5. **[CODE_EXAMPLES]** - Code snippets are illustrative, not tested
+
+### For Practical Implementation:
+
+- **[00_CONCEPTUAL_FRAMEWORKS.md](./00_CONCEPTUAL_FRAMEWORKS.md)** - Consolidated theoretical models
+- **[00_IMPLEMENTATION_PATTERNS.md](./00_IMPLEMENTATION_PATTERNS.md)** - Real implementation patterns with working tools
+
+### Appropriate Use:
+
+- Academic research and conceptual exploration
+- Hypothesis generation for experimentation
+- Understanding theoretical frameworks
+
+### NOT Appropriate For:
+
+- Production system deployment
+- Business decisions without validation
+- Claims about actual capabilities
+
+---
+
+
 ### 1.1 The Paradigm Shift
 
 Traditional software engineering operates in the realm of "good enough" - where bugs are inevitable, performance is approximate, and correctness is probabilistic. **Supercompute** represents a fundamental paradigm shift: programming as rigorous applied science where:

@@ -1,4 +1,14 @@
 # 🌟 Welcome to the Quantum Forest Supercompute Dissertation
+## ⚠️ Repository Status Update
+
+**This repository is currently undergoing systematic improvement to distinguish between:**
+- **[THEORETICAL]** concepts and models (marked with 📚)
+- **[SPECULATIVE]** fictional implementations (marked with ⚠️)  
+- **[PRACTICAL]** working patterns (marked with ✅)
+
+> **"Where computational physics concepts evolve from theory to practice"**
+
+**Current State**: Research repository with theoretical frameworks being progressively upgraded to include practical implementations.
 
 > **"Where computational physics transcends mechanical limitations to achieve quantum speeds through unified computer sciences integration."**
 
