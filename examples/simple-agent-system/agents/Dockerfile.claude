@@ -1,0 +1,25 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY config/ ./config/
+COPY agents/claude_agent.py /app/agents/
+
+# Create non-root user for security
+RUN useradd -m -s /bin/bash -u agent agent
+USER agent
+
+# Expose port
+EXPOSE 8000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s \
+  CMD curl -f http://localhost:8000/health || exit 1
+
+# Run the application
+CMD ["python", "-u", "agent", "/app/agents/claude_agent.py"]

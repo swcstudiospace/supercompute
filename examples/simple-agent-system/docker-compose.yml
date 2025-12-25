@@ -1,0 +1,127 @@
+version: '3.8'
+
+services:
+  # Redis - State store and task broker
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  # RabbitMQ - Message broker
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+  # Claude Reasoning Agent
+  claude-agent:
+    build: ./agents
+    environment:
+      REDIS_HOST: redis
+      RABBITMQ_HOST: rabbitmq
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-demo-key}
+    depends_on:
+      - redis
+      - rabbitmq
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./config:/app/config
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+
+  # GPT Synthesis Agent
+  gpt-synthesis:
+    build: ./agents
+    environment:
+      REDIS_HOST: redis
+      RABBITMQ_HOST: rabbitmq
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-demo-key}
+    depends_on:
+      - redis
+      - rabbitmq
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./config:/app/config
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+
+  # Celery Worker - Task processing
+  celery-worker:
+    build: ./agents
+    environment:
+      REDIS_HOST: redis
+      RABBITMQ_HOST: rabbitmq
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-demo-key}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-demo-key}
+    depends_on:
+      - redis
+      - rabbitmq
+    volumes:
+      - ./config:/app/config
+    command: celery -A workers worker -l INFO --loglevel=info
+    restart: unless-stopped
+
+  # Prometheus - Metrics collection (optional)
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus
+      - prometheus_data:/prometheus
+    command: --config.file=/etc/prometheus/prometheus.yml
+
+  # Grafana - Metrics visualization (optional)
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_USERS_ALLOW_SIGN_UP: no
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+
+  # Agent health dashboard
+  health-dashboard:
+    build: ./monitoring
+    environment:
+      REDIS_HOST: redis
+      RABBITMQ_HOST: rabbitmq
+      AGENT_PORTS: 8000,8001
+    depends_on:
+      - redis
+      - rabbitmq
+      - claude-agent
+      - gpt-synthesis
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
+
+volumes:
+  redis_data:
+  rabbitmq_data:
+  prometheus_data:
+  grafana_data:

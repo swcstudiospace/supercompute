@@ -1,0 +1,24 @@
+# Simple Agent System - Production-Ready Version
+
+This minimal set of dependencies is sufficient for the working demo.
+
+## Core Dependencies
+# HTTP Server (Python 3.11+ includes this built-in)
+http.server>=3.8
+
+## Note on External Libraries
+
+The production patterns document (00_IMPLEMENTATION_PATTERNS.md) provides guidance for integrating:
+- LangChain with Claude/OpenAI
+- Flask for REST APIs
+- Redis for caching
+- Celery for task queues
+- RabbitMQ for messaging
+
+This demo version uses only Python standard library to demonstrate:
+1. RESTful API architecture
+2. In-memory caching
+3. Problem analysis workflow
+4. Health checks and metrics
+
+For production use, see 00_IMPLEMENTATION_PATTERNS.md for detailed integration examples.
